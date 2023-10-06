@@ -1,0 +1,44 @@
+/* Navbar.module.css */
+
+.navbar {
+    background: rgba(255, 255, 255, 0.3); /* Semi-transparent white background */
+    backdrop-filter: blur(10px); /* Blur effect */
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    padding: 10px 0;
+  }
+  
+  .navbarContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .navbarLogo {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333; /* Text color */
+  }
+  
+  .navbarLogo:hover {
+    color: #555; /* Hover color */
+  }
+  
+  .navbarLinks {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .navbarLink {
+    text-decoration: none;
+    color: #333; /* Text color */
+  }
+  
+  .navbarLink:hover {
+    color: #555; /* Hover color */
+  }
+  
