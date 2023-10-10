@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from 'next/router';
 import {
     validateEmail,
     validateUsername,
@@ -7,7 +8,8 @@ import {
 } from "./logic/validation";
 
 import styles from '@/styles/register.module.css'
-import axios from 'axios';
+import Navbar from "./components/navbar";
+import registerUser from "./api/registerUser";
 
 
 const input = 'rounded-none rounded-r-lg bg-gray-0 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-zinc-900 dark:border-gray-400 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
@@ -23,7 +25,8 @@ const apiUrl = 'http://localhost:8080/api'; // Replace with your backend URL
 
 
 
-const Register = () => {
+const AddUserPage = () => {
+    const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
         username: "",
@@ -49,7 +52,7 @@ const Register = () => {
 
         const newErrors = {};
 
-        newErrors.username = validateUsername(formData.username);
+        newErrors.username = await validateUsername(formData.username);
         newErrors.email = validateEmail(formData.email);
         newErrors.password = validatePassword(formData.password);
         newErrors.phoneNumber = validatePhoneNumber(formData.phoneNumber);
@@ -67,11 +70,28 @@ const Register = () => {
             return;
         }
 
+        const register = await registerUser(formData);
+        console.log(register)
+        router.push('/dashboard');
+
 
     };
 
+    useEffect(() => {
+        // Check if the userRole is stored in localStorage
+        const user = JSON.parse(localStorage.getItem('user'));
+
+        console.log(typeof (user))
+
+        // If userRole is not 'admin', redirect to 'forbidden' page
+        if (user.userRole !== 'admin') {
+            router.push('/forbidden');
+        }
+    }, []);
+
     return (
-        <main>
+        <> <Navbar />  
+          <main>
             <div className={styles.register}>
                 <form onSubmit={handleSubmit} className={styles.registerForm}>
                     <div>
@@ -114,14 +134,14 @@ const Register = () => {
                             />
                         </div>
                         {/* <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            className={errors.email ? "error-input" : ""}
-                            required
-                        /> */}
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className={errors.email ? "error-input" : ""}
+                        required
+                    /> */}
                         {/* {errors.email && <p className="error">{errors.email}</p>} */}
                     </div>
                     <div>
@@ -169,14 +189,14 @@ const Register = () => {
                             </span>
                         </div>
                         {/* <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            className={errors.password ? "error-input" : ""}
-                            required
-                        /> */}
+                        type="password"
+                        id="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        className={errors.password ? "error-input" : ""}
+                        required
+                    /> */}
                         {errors.password && <p className="error">{errors.password}</p>}
                     </div>
                     <div>
@@ -210,24 +230,15 @@ const Register = () => {
                                 required
                             />
                         </div>
-                        {/* <input
-                            type="tel"
-                            id="phoneNumber"
-                            name="phoneNumber"
-                            value={formData.phoneNumber}
-                            onChange={handleChange}
-                            className={errors.phoneNumber ? "error-input" : ""}
-                            required
-                        /> */}
                         {errors.phoneNumber && <p className="error">{errors.phoneNumber}</p>}
                     </div>
                     <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                        <button type="submit" className="button-4 dark:bg-stone-900 dark:hover:bg-stone-600">Register</button>
+                        <button type="submit" className="button-4 dark:bg-stone-900 dark:hover:bg-stone-600">Add user</button>
                     </div>
                 </form>
             </div>
-        </main>
+        </main></>
     );
 };
 
-export default Register;
+export default AddUserPage;

@@ -290,5 +290,5 @@ main {
 
 
   body{
-    background-size: calc(100vw/2) !important;
+    background-size: calc(100vw/4) !important;
   }
