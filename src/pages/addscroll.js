@@ -74,11 +74,11 @@ function FileUploadForm() {
 
         reader.onload = async (event) => {
             const fileData = event.target.result;
-            const binaryString = Array.from(new Uint8Array(fileData)); // Convert to array of bytes
+            const fileText = new TextDecoder().decode(fileData); // Convert binary data to text
 
             try {
                 const dataToSend = {
-                    binaryData: binaryString,
+                    textData: fileText,
                     name: name,
                     user: user.username,
                     tags: tags,
@@ -100,7 +100,7 @@ function FileUploadForm() {
             }
         };
 
-        reader.readAsArrayBuffer(file); // Read the file as ArrayBuffer
+        reader.readAsArrayBuffer(file);
     };
 
     function defaultRenderTag(props) {
