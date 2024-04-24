@@ -10,6 +10,8 @@ import styles from '@/styles/register.module.css'
 import axios from 'axios';
 
 
+
+
 const input = 'rounded-none rounded-r-lg bg-gray-0 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-zinc-900 dark:border-gray-400 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
 const passwordInput = 'rounded-none rounded-l-lg bg-gray-0 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 dark:bg-zinc-900 dark:border-gray-400 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
 const correctInput = 'bg-green-50 border border-green-500 text-green-900 placeholder-green-700 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-green-100 dark:border-green-400'
@@ -17,7 +19,12 @@ const errorInput = 'rounded-none rounded-r-lg border-2 border-red-500 text-red-9
 // const errorInput  = 'bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full p-2.5 dark:bg-red-100 dark:border-red-400'
 
 
-const apiUrl = 'http://localhost:8080/api'; // Replace with your backend URL
+const apiUrl = 'http://localhost:8080/api';
+
+
+
+
+// Replace with your backend URL
 
 
 
